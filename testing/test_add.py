@@ -1,13 +1,19 @@
 from datetime import date
+from sqlalchemy.orm import Session as SessionType
 from create_db import create_user, Session
 
 
-# class TestCreateUser:
-#
-#     def test_create_user(self):
-#         result = create_user(Session, "Стас", 35, date(1984, 10, 20), 2)
-#         print(result)
-#         assert result
+class TestCreateUser:
+    def test_create_user(self):
+        session: SessionType = Session()
+        user = {
+          "name": "Kelly Slater",
+          "age": 50,
+          "born": date(1972, 2, 11),
+          "board": 3
+          }
 
-""" не понял логику как можно написать тест на проверку добавления данных в таблицу, Прошу подскажите примером (((( """
+        result = create_user(session, **user)
+        assert result.age == user.get("age")
+
 
